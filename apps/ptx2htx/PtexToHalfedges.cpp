@@ -172,7 +172,7 @@ uint32_t cbf_EncodeBit(const uint32_t *cbf, uint32_t bitID)
     uint32_t handle = 0;
 
     while (heapID > 1u) {
-        uint32_t siblingID = (uint)heapID & (~1u);
+        uint32_t siblingID = (uint32_t)heapID & (~1u);
         uint32_t bitCount = cbf[siblingID];
 
         handle+= (heapID & 1u) * bitCount;

@@ -112,10 +112,10 @@ int main(int argc, char** argv) {
     const char* inputPath = argv[1];
     const char* outputPath = argv[2];
 
-    Ptex::String err;
-    PtexTexture* ptex = PtexTexture::open(inputPath, err);
+    Ptex::String p_err;
+    PtexTexture* ptex = PtexTexture::open(inputPath, p_err);
     if (!ptex) {
-        fprintf(stderr, "Failed to open Ptex file: %s\n", err.c_str());
+        fprintf(stderr, "Failed to open Ptex file: %s\n", p_err.c_str());
         return 1;
     }
 
@@ -123,6 +123,7 @@ int main(int argc, char** argv) {
     PtexMesh* ptex_mesh = LoadPtexMesh(ptex);
     cc_Mesh* halfedge_mesh = PtexToHalfedges(ptex_mesh);
 
+    Htex::String err;
     HtexWriter* writer = HtexWriter::open(outputPath, halfedge_mesh, Htex::mt_quad, Htex::dt_uint8, 4, 3, err);
     if (!writer) {
         fprintf(stderr, "Failed to create HtexWriter: %s\n", err.c_str());
